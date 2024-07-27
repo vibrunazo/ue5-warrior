@@ -13,5 +13,9 @@ UCLASS()
 class WARRIOR_API AWarriorHeroCharacter : public AWarriorBaseCharacter
 {
 	GENERATED_BODY()
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 	
 };
