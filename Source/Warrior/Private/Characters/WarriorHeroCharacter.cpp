@@ -8,6 +8,7 @@
 
 #include "WarriorDebugHelper.h"
 #include "WarriorGameplayTags.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/Input/WarriorInputComponent.h"
 #include "DataAssets/Input/DataAsset_InputConfig.h"
@@ -39,6 +40,21 @@ AWarriorHeroCharacter::AWarriorHeroCharacter()
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
 }
 
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (WarriorAbilitySystemComponent && WarriorAttributeSet)
+	{
+		const FString ASCText = FString::Printf(TEXT("OwnerActor: %s, AvatarActor: %s"),
+			*WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(),
+			*WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+		Debug::Print("Ability System Component valid: " + ASCText, FColor::Green);
+		Debug::Print("AttributeSet valid: " + ASCText, FColor::Green);
+		
+	}
+}
+
 void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgot to assign valid Data Asset as InputConfigDataAsset?"));
@@ -57,7 +73,6 @@ void AWarriorHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Debug::Print(TEXT("Hello World!"));
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
