@@ -7,6 +7,7 @@
 #include "GameFramework/Character.h"
 #include "WarriorBaseCharacter.generated.h"
 
+class UDataAsset_StartupDataBase;
 class UWarriorAttributeSet;
 class UWarriorAbilitySystemComponent;
 
@@ -32,6 +33,10 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "AbilitySystem")
 	UWarriorAttributeSet* WarriorAttributeSet;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Character Data")
+	TSoftObjectPtr<UDataAsset_StartupDataBase> CharacterStartupData;
+	
 
 public:
 	FORCEINLINE UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponent() const { return WarriorAbilitySystemComponent; }

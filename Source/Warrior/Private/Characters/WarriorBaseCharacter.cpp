@@ -32,7 +32,8 @@ void AWarriorBaseCharacter::PossessedBy(AController* NewController)
 	if (WarriorAbilitySystemComponent)
 	{
 		WarriorAbilitySystemComponent->InitAbilityActorInfo(this, this);
-		
+
+		ensureMsgf(!CharacterStartupData.IsNull(), TEXT("CharacterStartupData was not set on %s"), *GetName());
 	}
 }
 
